@@ -1,0 +1,11 @@
+@import "./colors.scss";
+
+@mixin text($fontweight, $fontsize, $lineheight, $color, $opacity: 1) {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: $fontweight;
+  font-size: $fontsize;
+  line-height: $lineheight;
+  color: $color;
+  opacity: $opacity;
+}

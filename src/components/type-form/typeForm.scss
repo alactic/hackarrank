@@ -1,0 +1,56 @@
+@import "../../assets/common/colors.scss";
+@import "../../assets/common/mixins.scss";
+
+
+.manage-type-container{
+    border: 1px solid $spn-200-color;
+    border-radius: 5px;
+    margin: 20px 0 0 10px;
+    .title {
+        height: 35px;
+        margin-bottom: 10px;
+        background-color: $spn-200-color;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        @include text(500, 16px, 15px, $spo-100-color);
+    }
+    .delete {
+        @include text(500, 12px, 15px, $white);
+        cursor: pointer;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $spr-100-color;
+    }
+    label{
+        @include text(500, 17px, 15px, $spo-100-color);
+    }
+    .form-item{
+        padding: 0 10px 30px 10px;
+    }
+    input, select {
+        height: 35px;
+    }
+    select {
+        background-color: $spn-800-color;
+        @include text(300, 14px, 15px, $white);
+    }
+    .split-input{
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .split-select{
+        width: 70%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .fields {
+      display: flex;
+      margin-bottom: 12px;
+    }
+}

@@ -1,0 +1,26 @@
+@import "../../../assets/common/colors.scss";
+@import "../../../assets/common/mixins.scss";
+
+.header-container{
+    .col {
+        padding: 0;
+    }
+    header {
+        background-color: $spn-300-color;
+        height: 60px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        .active, .objector {
+            @include text(500, 21px, 15px, $spo-100-color);
+            margin-right: 20px;        
+            cursor: pointer;
+         }
+         .inactive {
+            margin-right: 20px;     
+            cursor: pointer;   
+            @include text(500, 18px, 15px, $spn-400-color);
+          }
+    }
+}

@@ -1,0 +1,10 @@
+// Override default variables before the import
+
+.bg-primary {
+  /* background-color: #34495e; */
+  background-color: #013444;
+  min-height: 100vh;
+}
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";

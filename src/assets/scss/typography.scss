@@ -1,0 +1,115 @@
+@import "../common/partials/fonts.scss";
+
+html,
+body,
+p,
+span,
+a,
+i,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $sp-primary-font;
+}
+
+.sp-heading0 {
+  font-size: $sp-fontsize--56;
+  line-height: $sp-lineheight--64;
+  font-weight: $sp-fontweight--600;
+  letter-spacing: 0px;
+}
+
+.sp-heading1 {
+  font-size: $sp-fontsize--48;
+  line-height: $sp-lineheight--56;
+  font-weight: $sp-fontweight--600;
+  letter-spacing: 0px;
+}
+
+.sp-heading2 {
+  font-size: $sp-fontsize--36;
+  line-height: $sp-lineheight--40;
+  font-weight: $sp-fontweight--600;
+  letter-spacing: 0.25px;
+}
+
+.sp-heading3 {
+  font-size: $sp-fontsize--28;
+  line-height: $sp-lineheight--32;
+  font-weight: normal;
+  letter-spacing: 0.25px;
+}
+
+.sp-disp-heading {
+  font-size: $sp-fontsize--24;
+  line-height: $sp-lineheight--24;
+  font-weight: $sp-fontweight--500;
+  letter-spacing: 0.2px;
+}
+
+.sp-section-title {
+  font-size: $sp-fontsize--18;
+  line-height: $sp-lineheight--24;
+  font-weight: $sp-fontweight--600;
+  letter-spacing: 0.25px;
+}
+
+.sp-subtitle1 {
+  font-size: $sp-fontsize--16;
+  line-height: $sp-lineheight--24;
+  font-weight: $sp-fontweight--600;
+  letter-spacing: 0.2px;
+}
+
+.sp-subtitle2 {
+  font-size: $sp-fontsize--14;
+  line-height: $sp-lineheight--16;
+  font-weight: $sp-fontweight--600;
+  letter-spacing: 0.2px;
+}
+
+.sp-body-text1 {
+  font-size: $sp-fontsize--16;
+  line-height: $sp-lineheight--24;
+  font-weight: $sp-fontweight--400;
+  letter-spacing: -0.05px;
+}
+
+.sp-body-text2 {
+  font-size: $sp-fontsize--14;
+  line-height: $sp-lineheight--24;
+  font-weight: $sp-fontweight--400;
+  letter-spacing: 0.4px;
+}
+
+.sp-text1 {
+  font-size: $sp-fontsize--16;
+  line-height: $sp-lineheight--16;
+  font-weight: $sp-fontweight--400;
+  letter-spacing: -0.05px;
+}
+
+.sp-text2 {
+  font-size: $sp-fontsize--14;
+  line-height: $sp-lineheight--16;
+  font-weight: $sp-fontweight--400;
+  letter-spacing: 0.4px;
+}
+
+.sp-caption {
+  font-size: $sp-fontsize--12;
+  line-height: $sp-lineheight--16;
+  font-weight: $sp-fontweight--400;
+  letter-spacing: 0.4px;
+}
+
+.sp-chart-text {
+  font-size: $sp-fontsize--10;
+  line-height: $sp-lineheight--16;
+  font-weight: $sp-fontweight--400;
+  letter-spacing: 0.2px;
+}

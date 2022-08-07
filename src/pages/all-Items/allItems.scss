@@ -1,0 +1,25 @@
+@import "../../assets/common/colors.scss";
+@import "../../assets/common/mixins.scss";
+
+
+.all-items-container{
+    .title {
+        height: 35px;
+        margin-bottom: 10px;
+        background-color: $spn-200-color;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        @include text(500, 16px, 15px, $white);
+    }
+    .items{
+        border: 1px solid $spn-200-color;
+        border-radius: 5px;
+        margin: 20px 0 0 0;
+        padding: 0;
+        // background-color: red;
+    }
+    .form-item{
+        padding: 0 20px;
+    }
+}

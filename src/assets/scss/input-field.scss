@@ -1,0 +1,68 @@
+@import "../common/partials/fonts.scss";
+@import "../common/partials/variables";
+@import "../common/partials/spacing";
+
+.input {
+  width: 100%;
+  position: relative;
+  &__label {
+    display: block;
+    margin-bottom: $cs-03;
+    color: $spn-700-color;
+    font-size: $sp-fontsize--14;
+  }
+  &__text {
+    height: 40px;
+    width: 100%;
+    color: #000;
+    font-size: $sp-fontsize--16;
+    stroke: $spg-200-color;
+    border-radius: $br-4;
+    border: 1px solid $offWhite;
+    padding: $cs-06 $cs-06;
+    &:focus {
+      color: #000;
+      stroke: $spb-600-color;
+      outline-color: $spb-600-color;
+    }
+    &:disabled {
+      fill: $spg-100-color;
+    }
+    &:invalid {
+      border-color: $spr-600-color;
+    }
+  }
+  &__btn {
+    position: absolute;
+    bottom: -7px;
+    right: 0;
+    color: #3a434b;
+    border: none;
+    background-color: transparent;
+    .ri- {
+      font-size: $sp-fontsize--18;
+      line-height: $sp-lineheight--20;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  &__text--helper,
+  &__text--error {
+    font-size: $sp-fontsize--12;
+    display: block;
+    margin-top: $cs-03;
+  }
+  &__text--error {
+    color: $spr-600-color;
+  }
+  &__text--helper {
+    color: $spn-700-color;
+  }
+
+  &__radio {
+    &:checked {
+      background-color: #1e944d !important;
+    }
+  }
+}

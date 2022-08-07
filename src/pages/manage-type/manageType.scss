@@ -1,0 +1,14 @@
+@import "../../assets/common/colors.scss";
+@import "../../assets/common/mixins.scss";
+
+.add-type {
+    height: 35px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $spn-800-color;
+    @include text(300, 14px, 15px, $white);
+    margin-top: 20px;
+    cursor: pointer;
+}
