@@ -11,16 +11,59 @@
         width: 100%;
         display: flex;
         align-items: center;
-        padding-left: 10px;
-        .active, .objector {
+        padding: 0 10px;
+         .active, .objector {
             @include text(500, 21px, 15px, $spo-100-color);
             margin-right: 20px;        
             cursor: pointer;
-         }
+          }
          .inactive {
             margin-right: 20px;     
             cursor: pointer;   
             @include text(500, 18px, 15px, $spn-400-color);
           }
+          
+          .fa-bars{
+            display: none;
+        }
+    }
+    .dropdown{
+        display: none;
+      }
+
+    @media screen and (max-width: 768px) {
+        header {
+            .active, .inactive {
+              display: none;
+            }
+            display: flex;
+            justify-content: space-between;
+            .fa-bars{
+                cursor: pointer;
+                display: block;
+            }
+        }
+        .dropdown {
+            display: block;
+            position: absolute;
+            background-color: $white;
+            z-index: 10;
+            width: 100%;
+            padding-bottom: 20px;
+            span {
+                display: block;
+                padding: 8px 10px;
+            }
+            .active, .objector {
+                @include text(500, 21px, 15px, $spo-100-color);
+                margin-right: 20px;        
+                cursor: pointer;
+              }
+             .inactive {
+                margin-right: 20px;     
+                cursor: pointer;   
+                @include text(500, 18px, 15px, $spn-400-color);
+              }
+        }
     }
 }

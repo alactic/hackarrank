@@ -30,8 +30,7 @@ const AllItems = () =>{
     const deleteItem = (index) =>{ 
            forms.splice(index, 1)
           setForms([...forms]);
-      localStorage.setItem("formDb", JSON.stringify(forms))
-
+         localStorage.setItem("formDb", JSON.stringify(forms))
     }
          
       useEffect(() => {

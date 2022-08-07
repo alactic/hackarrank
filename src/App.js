@@ -18,15 +18,16 @@ function App() {
     }
   }, [])
   return (
-    <div>
+    <>
       <Header/>
-      <Switch>
-        <Route path="/manage-type" component={ManagePage} exact />
-        <Route path="/all" component={AllItems} exact />
-        <Route path="/type/:id" component={Page} exact />
-
-      </Switch>
-    </div>
+      <div className="app-container">
+        <Switch>
+          <Route path="/manage-type" component={ManagePage} exact />
+          <Route path="/all" component={AllItems} exact />
+          <Route path="/type/:id" component={Page} exact />
+        </Switch>
+      </div>
+    </>
      );
 }
 

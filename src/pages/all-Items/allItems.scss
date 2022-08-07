@@ -3,6 +3,7 @@
 
 
 .all-items-container{
+    // padding: 0 10px;
     .title {
         height: 35px;
         margin-bottom: 10px;
@@ -17,9 +18,8 @@
     .items{
         border: 1px solid $spn-200-color;
         border-radius: 5px;
-        margin: 20px 0 0 0;
+        margin: 20px 10px 0 10px;
         padding: 0;
-        // background-color: red;
     }
     .form-item{
         padding: 0 20px;
@@ -32,5 +32,8 @@
     .fa-trash{
         color: $spr-100-color;
         cursor: pointer;
+    }
+    @media screen and (max-width: 768px) {
+      padding-right: 20px;
     }
 }
