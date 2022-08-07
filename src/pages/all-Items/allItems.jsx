@@ -25,7 +25,14 @@ const AllItems = () =>{
         data?.fields.filter(val => form.push({label: val.label, type: val.type, value: "", id: val.id, formId}))
         setForms([...forms, {form: form, type, title, id, formId: +new Date()}])
       }    
-      }
+    }
+
+    const deleteItem = (index) =>{ 
+           forms.splice(index, 1)
+          setForms([...forms]);
+      localStorage.setItem("formDb", JSON.stringify(forms))
+
+    }
          
       useEffect(() => {
         const formDb = localStorage.getItem("formDb")
@@ -40,9 +47,9 @@ const AllItems = () =>{
         <div className="container-fluid">
          <div className="row all-items-container"> 
             {forms?.map((val, formIndex) => (
-                <div key={formIndex} className="col-sm-12 col-md-3 col-lg-3 items">
+                <div key={val.id} className="col-sm-12 col-md-3 col-lg-3 items">
                       <div className="title"><span>{val?.['title']}</span>
-                      <i className="fa fa-trash"></i>
+                      <i className="fa fa-trash" onClick={() =>deleteItem(formIndex)}></i>
                       </div>
                      {val?.form?.map((formField, fieldIndex) =><Fragment key={formField.id}>
                       <div className="form-item">

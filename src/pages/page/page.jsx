@@ -13,7 +13,6 @@ const AllItems = () =>{
     const onInputField = (e, formIndex, fieldIndex) => {
       const {value} = e.target;
       const formDb = localStorage.getItem("formDb")
-        
         if(formDb) {
           let jsonData = JSON.parse(formDb);
             for(let i=0; i < jsonData.length; i++){
@@ -26,6 +25,22 @@ const AllItems = () =>{
               }
         }
     }
+
+    const deleteItem = (index, formId) =>{ 
+        const formDb = localStorage.getItem("formDb")
+        
+        if(formDb) {
+          let jsonData = JSON.parse(formDb);
+        for(let i=0; i < jsonData.length; i++){
+            if(jsonData[i]['formId'] === formId) {
+                jsonData.splice(i, 1)
+                forms.splice(index, 1)
+                localStorage.setItem("formDb", JSON.stringify([...jsonData]))
+                setForms([...forms])
+             }
+          }
+        }
+ }
 
     const addItem = (id) =>{ 
       const data = types.hackerTest?.allTypes?.filter(val=>val.id === Number(id))[0]
@@ -64,9 +79,9 @@ const AllItems = () =>{
         <div className="container-fluid">
          <div className="row all-items-container"> 
             {forms?.map((val, formIndex) => (
-                <div key={formIndex} className="col-sm-12 col-md-3 col-lg-3 items">
+                <div key={val.formId} className="col-sm-12 col-md-3 col-lg-3 items">
                       <div className="title"><span>{val?.['title']}</span>
-                      <i className="fa fa-trash"></i>
+                      <i className="fa fa-trash" onClick={()=>deleteItem(formIndex, val.formId)}></i>
                       </div>
                      {val?.form?.map((formField, fieldIndex) =><Fragment key={formField.id}>
                       <div className="form-item">
