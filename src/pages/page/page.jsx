@@ -1,70 +1,90 @@
 import React, {Fragment, useState} from 'react';
-import {useParams, useHistory} from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import {useParams} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import "../manage-type/manageType.scss";
-import { getTypes } from '../../redux/actions/hackerTest/hackerTest';
+import "../all-Items/allItems.scss";
 
-const Page = () =>{ 
+const AllItems = () =>{ 
     const params = useParams();
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const [payload, setPayload] = useState([]);
-    const [typeData, setTypeData] = useState(null);
+    const [forms, setForms] = useState([]);
     const types = useSelector((hackerTest)=>hackerTest)
-     
+      
     
-    const onInputField = (e, itemIndex, fieldIndex) => {
-       const {value} = e.target;
-       payload[itemIndex]["item"][fieldIndex]["value"] = value;
-       setPayload([...payload]);
-       const allItems = types?.hackerTest?.allTypes
-       let i = 0;
-       for(let type of allItems) {
-           if(type.id === Number(params.id)) {
-            allItems[i]["items"] = payload;
-            dispatch(getTypes(allItems));
-            localStorage.setItem("typeDb", JSON.stringify(allItems))
-            return;
-           }
-           i++
-       }
-       
+    const onInputField = (e, formIndex, fieldIndex) => {
+      const {value} = e.target;
+      const formDb = localStorage.getItem("formDb")
+        
+        if(formDb) {
+          let jsonData = JSON.parse(formDb);
+            for(let i=0; i < jsonData.length; i++){
+                if(jsonData[i]['formId'] === forms[formIndex]['formId']) {
+                    forms[formIndex]['form'][fieldIndex]['value'] = value;
+                    jsonData[i]['form'][fieldIndex]['value'] = value; 
+                    localStorage.setItem("formDb", JSON.stringify([...jsonData]))
+                    setForms([...forms])
+                 }
+              }
+        }
     }
 
-    const addItem = () =>{ 
-        const newPayload = typeData?.fields?.map((val)=>({value: "", id:val.id }));
-        setPayload([...payload, {item: newPayload}]);
+    const addItem = (id) =>{ 
+      const data = types.hackerTest?.allTypes?.filter(val=>val.id === Number(id))[0]
+      if(data){
+        const form = [];
+        const {type, formId, title, id} = data;
+        data?.fields.filter(val => form.push({label: val.label, type: val.type, value: "", id: val.id, formId}))
+        setForms([...forms, {form: form, type, title, id, formId: +new Date()}])
+        const formDb = localStorage.getItem("formDb")
+        
+        if(formDb) {
+          const jsonData = JSON.parse(formDb);
+          console.log({jsonData, form: {form: form, type, title, id}})
+          localStorage.setItem("formDb", JSON.stringify([...jsonData, {form: form, type, title, id, formId: +new Date()}]))
+      }    
       }
-
+    }
+         
       useEffect(() => {
-            const filteredItems = types.hackerTest?.allTypes?.filter(val => val.id === Number(params.id));
-            setTypeData(filteredItems?.[0]);
-            if(filteredItems?.[0]?.['items']){
-                setPayload([...filteredItems?.[0]?.['items']])
+        const formDb = localStorage.getItem("formDb")
+        
+        if(formDb) {
+          const jsonData = JSON.parse(formDb);
+          const formArray = []
+          jsonData.forEach(val => {
+            if(Number(params.id) === val.id) {
+                formArray.push(val)
             }
-     }, [types.hackerTest?.allTypes, params.id]);
+            setForms([...formArray])
+          })
+          
+        }
+         }, [types.hackerTest?.allTypes, params.id]);
  
-
     return(
         <div className="container-fluid">
-        <div className="row">
-            {payload?.map((itemType, itemIndex) => (
-              <div key={itemIndex} className="col-sm-12 col-md-3 col-lg-3">
-                {typeData?.fields?.map((val, fieldIndex) =>(
-                   <Fragment key={fieldIndex}>
-                   {itemType?.['item']?.[fieldIndex]?.['id'] === val?.id ?<div key={fieldIndex} className="form-group">
-                        <label for="type">{val.label}</label>
-                        <input type={val.type} value={itemType['item'][fieldIndex]['value']}  className="form-control" placeholder="" name="type" onChange={(e)=>onInputField(e, itemIndex, fieldIndex )}/>
-                  </div>: null}
-                </Fragment>))}
-               </div>))}
+         <div className="row all-items-container"> 
+            {forms?.map((val, formIndex) => (
+                <div key={formIndex} className="col-sm-12 col-md-3 col-lg-3 items">
+                      <div className="title"><span>{val?.['title']}</span>
+                      <i className="fa fa-trash"></i>
+                      </div>
+                     {val?.form?.map((formField, fieldIndex) =><Fragment key={formField.id}>
+                      <div className="form-item">
+                                <div className="form-group" >
+                                  <label for="type">{formField.label}</label>
+                                  <input type={formField.type} value={formField.value}  className="form-control" placeholder="" name="type" onChange={(e)=>onInputField(e, formIndex, fieldIndex)}/>
+                            </div>
+                        </div>
+                      </Fragment>)}
+               </div>
+               ))}
             <div className="col-sm-12 col-md-3 col-lg-3">
-              <div className="add-type" onClick={()=> addItem()}>Add Item</div>
+                <button value="Add Field" className="form-control" onClick={()=>addItem(params.id)}>
+                    Add Item</button>
             </div>
         </div>
         </div>
     )
 }
 
-export default Page
+export default AllItems

@@ -9,7 +9,9 @@
         background-color: $spn-200-color;
         display: flex;
         align-items: center;
-        padding-left: 10px;
+        padding: 0 10px;
+        display: flex;
+        justify-content: space-between;
         @include text(500, 16px, 15px, $white);
     }
     .items{
@@ -21,5 +23,14 @@
     }
     .form-item{
         padding: 0 20px;
+    }
+    select, button {
+        background-color: $spn-800-color;
+        margin-top: 20px;
+        @include text(300, 14px, 15px, $white);
+    }
+    .fa-trash{
+        color: $spr-100-color;
+        cursor: pointer;
     }
 }

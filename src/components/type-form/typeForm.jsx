@@ -46,7 +46,7 @@ const TypeForm = ({typePayload, index, removeType}) => {
         <div className="manage-type-container">
           <div className="title">
             <span>{payload?.type}</span>
-            <span className="delete" onClick={()=>removeType(index)}>x</span>
+            <i className="fa fa-trash" onClick={()=>removeType(index)}></i>
             </div>
             <div className="form-item">
                    <div className="form-group">
