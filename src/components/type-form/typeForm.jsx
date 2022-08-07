@@ -10,17 +10,42 @@ const TypeForm = ({typePayload, index, removeType}) => {
   const types = useSelector((hackerTest)=>hackerTest)
   const inputTypes = ["number", "text", "date", "checkbox"];
 
-  const onInputField = (e, fieldIndex, fieldName) => {
+  const onInputField = (e, fieldIndex, fieldName, val) => {
     const {name, value} = e.target;
-   
-    
+    const formDb = localStorage.getItem("formDb")    
     const allTypes = types.hackerTest?.allTypes
     if(fieldIndex || fieldIndex === 0) {
       if(value === "delete") {
-        fields.splice(fieldIndex, 1)
+        fields.splice(fieldIndex, 1);
+        if(formDb) {
+          const jsonData = JSON.parse(formDb);
+          for(let i = 0; i< jsonData.length; i++) {
+              for(let n = 0; n<jsonData[i]['form']['length']; n++) {
+                if(jsonData[i]['form'][n]['id'] === val.id) {
+                  jsonData[i]['form'].splice(n, 1);
+                  console.log({jsonData: jsonData[i]['form'][n], n, i})
+                  localStorage.setItem("formDb", JSON.stringify([...jsonData]))
+                  // return
+                }
+              }
+          }
+         }
       }else{
         fields[fieldIndex][fieldName] = value;
       }
+      if(formDb) {
+        const jsonData = JSON.parse(formDb);
+        for(let i = 0; i< jsonData.length; i++) {
+            for(let n = 0; n<jsonData[i]['form']['length']; n++) {
+              if(jsonData[i]['form'][n]['id'] === val.id) {
+                jsonData[i]['form'][n][fieldName] = value;
+                localStorage.setItem("formDb", JSON.stringify(jsonData))
+                // return
+              }
+            }
+        }
+       }
+   
         setFields([...fields])
         const newPayload = {...payload, fields} 
         setPayload(newPayload);
@@ -38,7 +63,8 @@ const TypeForm = ({typePayload, index, removeType}) => {
   }
 
   const addField = (e) =>{ 
-    setFields([...fields, {label:"", type: e.target.value, id:+new Date()}])
+    const formDb = localStorage.getItem("formDb")    
+    setFields([...fields, {label:"", type: e.target.value, id:+new Date()}]);
   }
 
  
@@ -61,8 +87,8 @@ const TypeForm = ({typePayload, index, removeType}) => {
                     {fields.map((val, i) => (
                     <div key={`${val}${i}`}>
                         <div className="fields">
-                            <input type="text" value={val.label} className="form-control split-input" placeholder="Object type" onChange={(e) =>onInputField(e, i, "label")}/>
-                            <select type="text" className="form-control split-select" onChange={(e) =>onInputField(e, i, "type")}>
+                            <input type="text" value={val.label} className="form-control split-input" placeholder="Object type" onChange={(e) =>onInputField(e, i, "label", val)}/>
+                            <select type="text" className="form-control split-select" onChange={(e) =>onInputField(e, i, "type", val)}>
                                 {inputTypes.map(type => (<option selected={type === val.type} value={type} key={type}>{type.toUpperCase()}</option>))}
                                 <option  value="delete">Delete</option>
                             </select>
@@ -70,7 +96,7 @@ const TypeForm = ({typePayload, index, removeType}) => {
                     </div>
                     ))}
                 <div className="form-group">
-                <select value="Add Field" className="form-control" onChange={addField}>
+                <select value="Add Field" className="form-control" onChange={(e)=>addField(e)}>
                     <option selected>Add Field</option>
                     {inputTypes.map(type => (<option value={type} key={type}>{type.toUpperCase()}</option>))}
                     </select>
